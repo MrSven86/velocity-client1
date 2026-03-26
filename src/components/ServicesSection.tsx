@@ -1,90 +1,69 @@
-import squareBrush from "@/assets/square-brush.svg";
+import iconSquare from "@/assets/icon-square.svg";
 import vama01 from "@/assets/vama-work-01.jpg";
 import vama02 from "@/assets/vama-work-02.jpg";
 import vama03 from "@/assets/vama-work-03.jpg";
 import vama05 from "@/assets/vama-work-05.jpg";
 import vama06 from "@/assets/vama-work-06.jpg";
 import vama07 from "@/assets/vama-work-07.jpg";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const services = [
-  {
-    image: vama01,
-    title: "Pintura Interior",
-    description: "Paredes, techos y aberturas con terminaciones impecables. Usamos las mejores pinturas del mercado y trabajamos con sumo cuidado para que tu hogar quede perfecto.",
-  },
-  {
-    image: vama02,
-    title: "Pintura Exterior y Fachadas",
-    description: "Renovamos la fachada de tu casa, edificio u oficina. Trabajos prolijos con preparación de superficie, sellado y pintura de calidad que resiste el tiempo.",
-  },
-  {
-    image: vama03,
-    title: "Revoques y Emparejamiento",
-    description: "Arreglamos grietas, humedad y superficies irregulares antes de pintar. El trabajo queda listo para pintar, sin sorpresas ni retoques posteriores.",
-  },
-  {
-    image: vama05,
-    title: "Pintura de Techos",
-    description: "Techos pintados con materiales antihumedad y antihongos. Trabajamos en departamentos, casas y edificios con el equipo adecuado para cada altura.",
-  },
-  {
-    image: vama06,
-    title: "Trabajos Comerciales y Consorcios",
-    description: "Pintamos locales, oficinas y espacios comunes de edificios. Trabajamos para consorcios con la misma responsabilidad y puntualidad de siempre.",
-  },
-  {
-    image: vama07,
-    title: "Durlock y Reformas Generales",
-    description: "Colocación de durlock, zócalos y pequeñas reformas que acompañan la pintura. Un solo equipo para todo el trabajo, sin coordinar múltiples contratistas.",
-  },
+  { image: vama01, title: "Pintura Interior", description: "Paredes, techos y aberturas con terminaciones impecables. Preparación de superficie incluida." },
+  { image: vama02, title: "Pintura Exterior y Fachadas", description: "Renovamos la fachada de tu casa, edificio u oficina con productos de calidad que duran." },
+  { image: vama03, title: "Revoques y Emparejamiento", description: "Arreglamos grietas y superficies irregulares antes de pintar — el trabajo sale perfecto." },
+  { image: vama05, title: "Pintura de Techos", description: "Techos con materiales antihumedad y antihongos. Para casas, departamentos y edificios." },
+  { image: vama06, title: "Trabajos para Consorcios", description: "Espacios comunes, fachadas y oficinas con la misma responsabilidad y puntualidad de siempre." },
+  { image: vama07, title: "Durlock y Reformas", description: "Colocación de durlock y zócalos que acompañan la pintura. Un solo equipo para todo." },
 ];
 
 const ServicesSection = () => {
-  return (
-    <section id="servicios" className="w-full bg-background py-10 lg:py-[55px]">
-      <div className="max-w-[1410px] mx-auto px-4 sm:px-8">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-1">
-            <img src={squareBrush} alt="" className="w-[32px] h-[36px]" />
-            <span className="text-primary text-xl lg:text-2xl font-bold uppercase leading-6">Nuestros Servicios</span>
-          </div>
-          <h2
-            className="text-3xl lg:text-[50px] font-normal text-foreground/80 leading-tight lg:leading-[56px]"
-            style={{ fontFamily: "'Franklin Gothic Heavy', 'Arial Black', sans-serif" }}
-          >
-            Pintura residencial y comercial en CABA
-          </h2>
-          <p className="text-foreground/60 text-base lg:text-lg leading-7 mt-2 max-w-[600px] mx-auto">
-            Pintura interior, exterior, revoques y reformas — todo con el mismo nivel de prolijidad y cuidado.
-          </p>
-        </div>
+  const { ref, isVisible } = useScrollReveal();
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-[12px]">
-          {services.map((service, index) => (
-            <div key={index} className="flex flex-col overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
-              <img src={service.image} alt={service.title} className="w-full h-[210px] object-cover" />
-              <div className="pt-[14px] px-[16px] pb-[16px]">
-                <h3
-                  className="text-xl lg:text-[22px] font-normal text-foreground mb-2"
-                  style={{ fontFamily: "'Franklin Gothic Heavy', 'Arial Black', sans-serif" }}
-                >
-                  {service.title}
-                </h3>
-                <p className="text-base text-muted-foreground leading-6">{service.description}</p>
+  return (
+    <section id="servicios" className="py-20 bg-background" ref={ref}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className={`flex items-center justify-center gap-3 mb-4 reveal ${isVisible ? "visible" : ""}`}>
+          <img src={iconSquare} alt="" className="h-10" />
+        </div>
+        <h2
+          className={`text-center text-4xl md:text-5xl font-bold capitalize mb-3 reveal ${isVisible ? "visible" : ""}`}
+          style={{ color: "hsl(var(--brand-green-dark))", transitionDelay: "100ms", fontFamily: "'Outfit', sans-serif" }}
+        >
+          Servicios de pintura en CABA y GBA
+        </h2>
+        <p className={`text-center text-muted-foreground text-lg mb-12 max-w-2xl mx-auto reveal ${isVisible ? "visible" : ""}`} style={{ transitionDelay: "200ms" }}>
+          Pintura interior, exterior, revoques y reformas — todo con el mismo nivel de prolijidad.
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {services.map((service, idx) => (
+            <div
+              key={idx}
+              className={`bg-card rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal-scale ${isVisible ? "visible" : ""}`}
+              style={{ transitionDelay: `${200 + idx * 100}ms` }}
+            >
+              <div className="overflow-hidden">
+                <img src={service.image} alt={service.title} className="w-full h-[210px] object-cover hover:scale-105 transition-transform duration-500" />
+              </div>
+              <div className="p-5">
+                <h3 className="text-xl font-bold mb-2 font-outfit" style={{ color: "hsl(var(--brand-green-dark))" }}>{service.title}</h3>
+                <p className="text-muted-foreground text-base leading-6 font-kanit">{service.description}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="flex justify-center mt-8">
+        <div className={`flex justify-center mt-10 reveal ${isVisible ? "visible" : ""}`} style={{ transitionDelay: "800ms" }}>
           <a
             href="https://wa.me/5491139034512"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 h-[56px] px-10 font-bold text-base uppercase text-white hover:opacity-90 transition-opacity"
-            style={{ background: "var(--gradient-cta)" }}
+            className="bg-secondary text-accent-foreground px-8 py-3 font-black uppercase text-sm tracking-wide flex items-center gap-2 hover:opacity-90 hover:scale-105 transition-all duration-300 rounded-sm font-outfit"
           >
             Pedí un Presupuesto Gratis
+            <svg className="w-4 h-3" fill="none" viewBox="0 0 16 12" stroke="currentColor" strokeWidth="2">
+              <path d="M1 6h14M10 1l5 5-5 5" />
+            </svg>
           </a>
         </div>
       </div>

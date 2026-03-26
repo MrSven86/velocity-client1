@@ -1,6 +1,5 @@
-import TopBar from "@/components/TopBar";
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
 import ResidentialSection from "@/components/ResidentialSection";
 import ServicesSection from "@/components/ServicesSection";
 import ReviewsSection from "@/components/ReviewsSection";
@@ -12,10 +11,9 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background relative overflow-x-hidden">
-      <TopBar />
-      <Navbar />
-      <HeroSection />
+    <div className="min-h-screen bg-background">
+      <Header />
+      <Hero />
       <ResidentialSection />
       <ServicesSection />
       <ReviewsSection />

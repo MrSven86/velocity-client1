@@ -1,4 +1,4 @@
-import squareBrush from "@/assets/square-brush.svg";
+import iconSquare from "@/assets/icon-square.svg";
 import vama01 from "@/assets/vama-work-01.jpg";
 import vama02 from "@/assets/vama-work-02.jpg";
 import vama03 from "@/assets/vama-work-03.jpg";
@@ -11,51 +11,51 @@ import vama09 from "@/assets/vama-work-09.jpg";
 import vama10 from "@/assets/vama-work-10.jpg";
 import vama11 from "@/assets/vama-work-11.jpg";
 import vama12 from "@/assets/vama-work-12.jpg";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const photos = [vama01, vama02, vama03, vama04, vama05, vama06, vama07, vama08, vama09, vama10, vama11, vama12];
 
 const GallerySection = () => {
-  return (
-    <section id="galeria" className="w-full bg-background py-10 lg:py-[55px]">
-      <div className="max-w-[1410px] mx-auto px-4 sm:px-8">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-1">
-            <img src={squareBrush} alt="" className="w-[28px] h-[32px]" />
-            <span className="text-primary text-xl font-bold uppercase">Trabajos Realizados</span>
-          </div>
-          <h2
-            className="text-3xl lg:text-[46px] font-normal text-foreground/80 leading-tight"
-            style={{ fontFamily: "'Franklin Gothic Heavy', 'Arial Black', sans-serif" }}
-          >
-            Resultados reales, en casas reales
-          </h2>
-          <p className="text-foreground/60 text-base mt-2 max-w-[520px] mx-auto">
-            Fotos de trabajos recientes en departamentos, casas y edificios de Buenos Aires.
-          </p>
-        </div>
+  const { ref, isVisible } = useScrollReveal();
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-3">
-          {photos.map((photo, i) => (
-            <div key={i} className="overflow-hidden aspect-square">
+  return (
+    <section id="galeria" className="py-20 bg-muted" ref={ref}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className={`flex items-center justify-center gap-3 mb-4 reveal ${isVisible ? "visible" : ""}`}>
+          <img src={iconSquare} alt="" className="h-10" />
+        </div>
+        <h2 className={`text-center text-4xl md:text-5xl font-bold capitalize mb-3 font-outfit reveal ${isVisible ? "visible" : ""}`} style={{ color: "hsl(var(--brand-green-dark))", transitionDelay: "100ms" }}>
+          Trabajos recientes en Buenos Aires
+        </h2>
+        <p className={`text-center text-muted-foreground text-lg mb-12 reveal ${isVisible ? "visible" : ""}`} style={{ transitionDelay: "200ms" }}>
+          Resultados reales en departamentos, casas y edificios.
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          {photos.map((img, idx) => (
+            <div
+              key={idx}
+              className={`aspect-square overflow-hidden rounded-xl group cursor-pointer reveal-scale ${isVisible ? "visible" : ""}`}
+              style={{ transitionDelay: `${200 + idx * 80}ms` }}
+            >
               <img
-                src={photo}
-                alt={`Trabajo de pintura VAMA ${i + 1}`}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                src={img}
+                alt={`Trabajo de pintura VAMA ${idx + 1}`}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
             </div>
           ))}
         </div>
 
-        <div className="flex justify-center mt-8">
+        <div className={`flex justify-center mt-10 reveal ${isVisible ? "visible" : ""}`} style={{ transitionDelay: "1000ms" }}>
           <a
             href="https://www.instagram.com/vamapinturadeobrasyservicios/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 h-[52px] px-8 font-bold text-base uppercase border-2 hover:bg-gray-50 transition-colors"
-            style={{ borderColor: "hsl(var(--primary))", color: "hsl(var(--primary))" }}
+            className="bg-secondary text-accent-foreground px-8 py-3 font-black uppercase text-sm tracking-wide flex items-center gap-2 hover:opacity-90 hover:scale-105 transition-all duration-300 rounded-sm font-outfit"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             Ver más en Instagram
+            <svg className="w-4 h-3" fill="none" viewBox="0 0 16 12" stroke="currentColor" strokeWidth="2"><path d="M1 6h14M10 1l5 5-5 5"/></svg>
           </a>
         </div>
       </div>
